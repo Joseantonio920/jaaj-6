@@ -9,7 +9,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 4,
-  nextobjectid = 38,
+  nextobjectid = 52,
   properties = {
     ["sw1"] = "546",
     ["sw2"] = "429",
@@ -67,7 +67,7 @@ return {
       properties = {},
       encoding = "base64",
       compression = "gzip",
-      data = "H4sIAAAAAAAEA82TgQrAIAhEb9uP79N3wi6EFVoxUBCl6fOqBdSwA7i976jyHOUn+fKLeZavfkXrI6fnHz57ELk0WZSuLJ/1PR1t7f0+o6vdAdFY5Vtvxirwda+KGd2qyehX7UqsyI/+Z7/Pivq9vij/Q7/Oz2YP3nlbt/k7plmjaPwHN6uQOgAGAAA="
+      data = "H4sIAAAAAAAEA2NgGAUjIQQYgZ4kFpMTHsxATUwEMLq5IPcQC0g1nxSzQW4gxXxSzSbFfHLMJtZ8cs0GmQ/SSwiD1I2CoRUCAHSCh5kABgAA"
     },
     {
       type = "objectgroup",
@@ -83,42 +83,42 @@ return {
       properties = {},
       objects = {
         {
-          id = 3,
+          id = 41,
           name = "",
           type = "",
           shape = "rectangle",
-          x = 320,
-          y = 32,
-          width = 128,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["collidable"] = true
-          }
-        },
-        {
-          id = 4,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 160,
-          y = 64,
-          width = 160,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["collidable"] = true
-          }
-        },
-        {
-          id = 5,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 160,
+          x = 64,
           y = 160,
+          width = 352,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 43,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 192,
+          width = 32,
+          height = 160,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 44,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 352,
           width = 288,
           height = 32,
           rotation = 0,
@@ -128,14 +128,14 @@ return {
           }
         },
         {
-          id = 6,
+          id = 45,
           name = "",
           type = "",
           shape = "rectangle",
-          x = 416,
-          y = 64,
+          x = 480,
+          y = 192.667,
           width = 32,
-          height = 96,
+          height = 32,
           rotation = 0,
           visible = true,
           properties = {
@@ -143,28 +143,13 @@ return {
           }
         },
         {
-          id = 10,
+          id = 47,
           name = "",
           type = "",
           shape = "rectangle",
-          x = 96,
-          y = 128,
+          x = 352,
+          y = 320,
           width = 32,
-          height = 128,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["collidable"] = true
-          }
-        },
-        {
-          id = 12,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 0,
-          y = 96,
-          width = 128,
           height = 32,
           rotation = 0,
           visible = true,
@@ -173,43 +158,13 @@ return {
           }
         },
         {
-          id = 13,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 0,
-          y = 256,
-          width = 128,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["collidable"] = true
-          }
-        },
-        {
-          id = 21,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 128,
-          y = 354,
-          width = 256,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["collidable"] = true
-          }
-        },
-        {
-          id = 24,
+          id = 48,
           name = "",
           type = "",
           shape = "rectangle",
           x = 384,
-          y = 448,
-          width = 64,
+          y = 288,
+          width = 32,
           height = 32,
           rotation = 0,
           visible = true,
@@ -218,13 +173,13 @@ return {
           }
         },
         {
-          id = 26,
+          id = 49,
           name = "",
           type = "",
           shape = "rectangle",
-          x = 480,
-          y = 96,
-          width = 288,
+          x = 416,
+          y = 256,
+          width = 32,
           height = 32,
           rotation = 0,
           visible = true,
@@ -233,43 +188,13 @@ return {
           }
         },
         {
-          id = 27,
+          id = 50,
           name = "",
           type = "",
           shape = "rectangle",
-          x = 480,
-          y = 128,
+          x = 448,
+          y = 224,
           width = 32,
-          height = 320,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["collidable"] = true
-          }
-        },
-        {
-          id = 29,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 736,
-          y = 128,
-          width = 32,
-          height = 384,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["collidable"] = true
-          }
-        },
-        {
-          id = 30,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 480,
-          y = 480,
-          width = 256,
           height = 32,
           rotation = 0,
           visible = true,
@@ -293,12 +218,12 @@ return {
       properties = {},
       objects = {
         {
-          id = 15,
+          id = 40,
           name = "",
           type = "player",
           shape = "rectangle",
-          x = 39,
-          y = 34,
+          x = 199,
+          y = 132,
           width = 18,
           height = 28,
           rotation = 0,
@@ -306,12 +231,12 @@ return {
           properties = {}
         },
         {
-          id = 18,
+          id = 42,
           name = "",
           type = "portal",
           shape = "ellipse",
-          x = 336,
-          y = 80,
+          x = 672,
+          y = 416,
           width = 64,
           height = 64,
           rotation = 0,
@@ -319,64 +244,12 @@ return {
           properties = {}
         },
         {
-          id = 19,
+          id = 51,
           name = "",
           type = "enemy",
           shape = "rectangle",
-          x = 323.5,
-          y = 0.5,
-          width = 24,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 34,
-          name = "",
-          type = "enemy",
-          shape = "rectangle",
-          x = 548,
-          y = 160.845,
-          width = 24,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 35,
-          name = "",
-          type = "enemy",
-          shape = "rectangle",
-          x = 548,
-          y = 256,
-          width = 24,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 36,
-          name = "",
-          type = "enemy",
-          shape = "rectangle",
-          x = 676,
-          y = 256,
-          width = 24,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 37,
-          name = "",
-          type = "enemy",
-          shape = "rectangle",
-          x = 676,
-          y = 160,
+          x = 132,
+          y = 320,
           width = 24,
           height = 32,
           rotation = 0,

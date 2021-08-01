@@ -12,7 +12,7 @@ function cam:moveTo(newX, newY, dt)
 end
 
 function cam:set()
-    lg.translate(lg:getWidth()/2-self.x, lg:getHeight()/2-self.y)
+    lg.translate(width/2-self.x, height/2-self.y)
 end
 
 return cam

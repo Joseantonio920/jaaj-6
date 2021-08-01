@@ -31,11 +31,13 @@ function player:load(x, y)
 	self.attack=false
 	self.height=500
 	self.animationTime=0
+	self.type="player"
 	
 	self.life=100
 	self.lifet=4
 	self.dano=0
-	self.hit=0
+	self.force=40
+	self.hited=false
 end
 
 function player:draw()
@@ -60,13 +62,13 @@ function player:update(dt)
 	self.lifet=self.lifet-dt
 	self:animation(dt)
 	if self.dano>0 and self.life>0 then
-		self.life=self.life-self.dano
+		self.life=self.life-self.dano*dt
 		self.lifet=4
 	end
 	
 	self:move(dt)
 	if self.attack then
-		attack:new(self.b:getX()+16*self.xscale, self.b:getY(), 8, 32, "enemy", .2)
+		attack:new(self.b:getX()+16*self.xscale, self.b:getY(), 8, 32, "enemy", .2, self.force)
 		
 		self.attack=false
 	end
@@ -79,8 +81,7 @@ function player:move(dt)
 	local vx, vy=self.b:getLinearVelocity()
 	if vy>1000 then love.event.quit() end
 	local hspd=(right-left)*self.spd
-	if self.hit>0 then hspd=vx end
-	self.hit=self.hit-dt
+	if self.hited then hspd=vx-200*math.sign(vx)*dt self.dano=0 if math.abs(vx)<100 then self.hited=false end end
 
 	self:updateState(hspd, vy)
 

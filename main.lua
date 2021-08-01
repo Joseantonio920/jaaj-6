@@ -1,3 +1,5 @@
+width, height=320, 240
+
 anim8=require "libs/anim8"
 sti=require "libs/sti"
 require "libs/math"
@@ -5,79 +7,70 @@ require "libs/math"
 lg=love.graphics
 lp=love.physics
 lk=love.keyboard
+lm=love.mouse
 lg.setDefaultFilter("nearest")
 
-player=require "scr/player"
-portal=require "scr/portal"
-enemy=require "scr/enemy"
-cam=require "scr/cam"
-attack=require "scr/attack"
+font=lg.getFont()
+room=require "rooms/menu"
 
-local bg=lg.newImage("assets/background.png")
-local bc={0, .8, .8}
-local bs=.2
+lg.clear()
+lg.print("loading", lg:getWidth()/2, lg:getHeight()/2, 0, 1, 1, font:getWidth("loading")/2, font:getHeight("loading")/2)
+lg.present()
+
+tx, ty=0, 0
+sx, sy=1, 1
 
 function love.load()
-	map=sti("map/1.lua", {"box2d"})
 	lp.setMeter(32)
 	world=lp.newWorld(0, 9.81*32, false)
 	world:setCallbacks(beginContact, endContact)
-	map:box2d_init(world)
-	map.layers.solid.visible=false
-	map.layers.enty.visible=false
 	
-	cam:load()
-	spawnObjects()
+	room:load()
 end
 
 function love.draw()
-	lg.setColor(bc)
-	lg.draw(bg)
-	lg.setColor(1, 1, 1)
+	sx, sy=lg:getWidth()/width, lg:getHeight()/height
+	tx, ty=0, 0
+	local mode=0
+	if sx>sy then sx=sy mode=1 end
+	if sx<sy then sy=sx mode=2 end
+	tx=(lg:getWidth()/sx-width)/2
+	ty=(lg:getHeight()/sy-height)/2
+
+	lg.scale(sx, sy)
+	lg.push()
+	lg.translate(tx, ty)
 	
-	cam:set()
-	map:draw(lg:getWidth()/2-cam.x, lg:getHeight()/2-cam.y)
-	player:draw()
-	portal:draw()
-	drawAllEnemy()
-	drawAllAttack()
+	lg.setColor(1, 1, 1)
+	room:draw()
+	
+	lg.pop()
+	lg.setColor(0, 0, 0)
+	if mode==1 then
+		lg.rectangle("fill", 0, 0, tx, height)
+		lg.rectangle("fill", lg:getWidth()/sx-tx, 0, tx, height)
+	elseif mode==2 then
+		lg.rectangle("fill", 0, 0, width, ty)
+		lg.rectangle("fill", 0, lg:getHeight()/sy-ty, width, ty)
+	end
 end
 
 function love.update(dt)	
-	bc[2]=bc[2]+bs*dt
-	if bc[2]>1 or bc[2]<0 then bs=-bs end
-	
 	world:update(dt)
-	player:update(dt)
-	portal:update(dt)
-	updateAllEnemy(dt)
-	updateAllAttack(dt)
+	room:update(dt)
 end
 
 function beginContact(a, b, contact)
-	player:beginContact(a, b, contact)
-	portal:beginContact(a, b, contact)
-	beginContactAllEnemy(a, b, contact)
-	beginContactAllAttack(a, b, contact)
+	room:beginContact(a, b, contact)
 end
 
 function endContact(a, b, contact)
-	player:endContact(a, b, contact)
-	endContactAllEnemy(a, b, contact)
+	room:endContact(a, b, contact)
 end
 
 function love.keypressed(key)
-	player:keypressed(key)
-end
-
-function spawnObjects()
-	for i, k in ipairs(map.layers.enty.objects) do
-		if k.type=="player" then
-			player:load(k.x+k.width/2, k.y+k.height/2)
-		elseif k.type=="portal" then
-			portal:load(k.x+k.width/2, k.y+k.height/2)
-		elseif k.type=="enemy" then
-			enemy:new(k.x+k.width/2, k.y+k.height/2)
-		end
+	if key=="f11" then
+		love.window.setFullscreen(not love.window.getFullscreen())
 	end
+	room:keypressed(key)
 end

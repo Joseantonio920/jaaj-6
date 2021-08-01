@@ -2,12 +2,13 @@ local enemy={}
 enemy.type="enemy"
 enemy.img=lg.newImage("assets/enemy.png")
 enemy.grid=anim8.newGrid(24, 32, enemy.img:getWidth(), enemy.img:getHeight())
-enemy.dano=5
+enemy.force=20
 enemy.spd=100
 local all={}
 
 function enemy:new(x, y)
-	local e={}
+	local e=setmetatable({}, {__index=self})
+
 	e.b=lp.newBody(world, x, y, "dynamic")
 	e.s=lp.newRectangleShape(24, 32)
 	e.f=lp.newFixture(e.b, e.s)
@@ -15,16 +16,18 @@ function enemy:new(x, y)
 	e.b:setFixedRotation(true)
 	e.b:setGravityScale(2)
 	e.rad=160
+	e.life=35
 	e.hangry=false
+	e.hited=false
+	e.dano=0
 
 	e.f:setUserData(e)
 	
 	e.idle=anim8.newAnimation(self.grid("1-3", 1), .25)
 	e.state="idle"
 	e.wall=nil
-	e.id=#all+1
 	
-	table.insert(all, setmetatable(e, {__index=self}))
+	table.insert(all, e)
 end
 
 function enemy:draw()
@@ -36,8 +39,14 @@ end
 function enemy:update(dt, id)
 	self.id=id
 	self:animation(dt)
-	
+
+	if self.dano>0 and self.life>0 then
+		self.life=self.life-self.dano*dt
+	end
+	if self.life<=0 then self:kill(id) end
+
 	self:move(dt)
+	--attack:new(self.b:getX(), self.b:getY(), 24, 32, "player", .1, self.force)
 end
 
 function enemy:animation(dt)
@@ -46,9 +55,9 @@ function enemy:animation(dt)
 	end
 end
 
-function enemy:kill()
+function enemy:kill(id)
 	self.f:destroy()
-	table.remove(all, self.id)
+	table.remove(all, id)
 end
 
 function enemy:move(dt)
@@ -63,23 +72,21 @@ function enemy:move(dt)
 	if self.hangry then
 		hspd=math.sign(dx)*self.spd
 	end
+
 	local vx, vy=self.b:getLinearVelocity()
+	if self.hited then hspd=vx-200*math.sign(vx)*dt if math.abs(vx)<100 then self.hited=false end end
+
 	self.b:setLinearVelocity(hspd, vy)
 end
 
 function enemy:beginContact(a, b, contact)
 	if (a==self.f or b==self.f) and (a==player.f or b==player.f) then
-		player.dano=self.dano
-		player.hit=.2
 		self.wall=contact
-		
-		player.b:setLinearVelocity(-(self.b:getX()-player.b:getX())*10, -(self.b:getY()-player.b:getY())*10)
 	end
 end
 
 function enemy:endContact(a, b, contact)
 	if self.wall==contact then
-		player.dano=0
 		self.wall=nil
 	end
 end
